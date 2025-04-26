@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jun</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</head>
+<style>
+  @keyframes fadeUp {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 1s ease-out forwards;
+  }
+</style>
+
+<style>
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+</style>
+
+
+<style>
+  .experience-section {
+    padding: 60px 20px;
+    background: #f9f9f9;
+    text-align: center;
+  }
+
+  .section-title {
+    font-size: 2.8rem;
+    margin-bottom: 60px;
+    font-weight: 700;
+    color: #222;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #4CAF50;
+  }
+
+  .timeline {
+    position: relative;
+    margin: 0 auto;
+    padding-left: 50px;
+    max-width: 800px;
+    text-align: left;
+    border-left: 3px solid #ddd;
+  }
+
+  .timeline-year {
+    position: relative;
+    left: -40px;
+    margin: 40px 0 20px 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #4CAF50;
+    background: #fff;
+    padding: 5px 12px;
+    border: 2px solid #4CAF50;
+    border-radius: 20px;
+    display: inline-block;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 60px;
+    padding-left: 20px;
+    transition: all 0.3s ease;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -15px;
+    top: 8px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 4px solid #4CAF50;
+    border-radius: 50%;
+    z-index: 2;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+
+  .timeline-content {
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .timeline-item:hover .timeline-content {
+    transform: translateY(-8px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  .timeline-item:hover .timeline-dot {
+    background: #4CAF50;
+    border-color: #4CAF50;
+  }
+
+  .position-title {
+    font-size: 1.6rem;
+    margin: 0 0 10px;
+    color: #333;
+    font-weight: 600;
+  }
+
+  .company {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0 0 8px;
+    color: #555;
+  }
+
+  .date-location {
+    font-size: 0.95rem;
+    color: #777;
+    margin-bottom: 12px;
+  }
+
+  .description {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 600px) {
+    .timeline {
+      padding-left: 30px;
+      border-left: 2px solid #ddd;
+    }
+
+    .timeline-dot {
+      left: -10px;
+      width: 16px;
+      height: 16px;
+    }
+
+    .timeline-content {
+      padding: 20px;
+    }
+
+    .timeline-year {
+      left: -20px;
+      font-size: 1rem;
+      padding: 3px 8px;
+    }
+
+    .position-title {
+      font-size: 1.4rem;
+    }
+
+    .company,
+    .date-location,
+    .description {
+      font-size: 0.9rem;
+    }
+  }
+</style>
+
+
+
+
+<body class="bg-gray-50 text-gray-800 font-sans">
+  <script>
+    AOS.init();
+  </script>
+  <!-- Hero -->
+  <section
+    class="min-h-screen flex flex-col justify-center items-center text-center px-4 bg-cover bg-center lg:bg-fixed"
+    style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&q=80');">
+    <div class="bg-white bg-opacity-80 backdrop-blur-sm p-10 rounded-xl shadow-xl animate-fade-up">
+      <h1 class="text-4xl md:text-6xl font-bold mb-4">Hi, I'm <span class="text-blue-600">Jun</span></h1>
+      <p class="text-xl text-gray-700 max-w-xl mb-6">
+        A passionate programmer who builds web applications using modern tools like React, TypeScript, Node.js, and
+        more.
+      </p>
+      <a href="#projects" class="px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">
+        View My Work
+      </a>
+    </div>
+
+  </section>
+
+  <!-- Skills -->
+  <section class="py-20 bg-white px-4">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-12">Tech Stack</h2>
+
+      <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-12 text-left">
+        <!-- Frontend -->
+        <div data-aos="fade-up" data-aos-delay="100">
+          <h3 class="text-xl font-semibold mb-4 text-blue-600">Frontend</h3>
+          <ul class="space-y-3">
+            <li class="flex items-center gap-3">
+              <i class="devicon-javascript-plain text-yellow-500 text-3xl"></i> JavaScript
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="devicon-typescript-plain text-blue-500 text-3xl"></i> TypeScript
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="devicon-react-original text-cyan-500 text-3xl"></i> React
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="devicon-nextjs-original text-black text-3xl"></i> Next.js
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="devicon-tailwindcss-plain text-sky-400 text-3xl"></i> Tailwind CSS
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="devicon-webpack-plain text-blue-600 text-3xl"></i> Webpack
+            </li>
+          </ul>
+        </div>
+
+        <!-- Backend -->
+        <div data-aos="fade-up" data-aos-delay="200">
+          <h3 class="text-xl font-semibold mb-4 text-green-600">Backend</h3>
+          <ul class="space-y-3">
+            <li class="flex items-center gap-3">
+              <i class="devicon-nodejs-plain text-green-500 text-3xl"></i> Node.js
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="devicon-express-original text-gray-800 text-3xl"></i> RESTful API
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="devicon-mysql-plain text-blue-700 text-3xl"></i> MySQL
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="devicon-postgresql-plain text-blue-500 text-3xl"></i> PostgreSQL
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="devicon-mongodb-plain text-green-600 text-3xl"></i> MongoDB
+            </li>
+          </ul>
+        </div>
+
+        <!-- Tools & DevOps -->
+        <div data-aos="fade-up" data-aos-delay="300">
+          <h3 class="text-xl font-semibold mb-4 text-purple-600">Tools & DevOps</h3>
+          <ul class="space-y-3">
+            <li class="flex items-center gap-3">
+              <i class="devicon-docker-plain text-blue-500 text-3xl"></i> Docker
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="devicon-amazonwebservices-original text-yellow-500 text-3xl"></i> AWS
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="devicon-git-plain text-orange-500 text-3xl"></i> Git
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="devicon-vscode-plain text-indigo-500 text-3xl"></i> VS Code
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Projects -->
+  <section id="projects" class="py-16 bg-gray-50 px-4">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-10">Projects</h2>
+      <div class="grid md:grid-cols-2 gap-8" data-aos="fade-up">
+
+        <!-- Project Card 1 -->
+        <a href="https://guardian.com.sg" target="_blank"
+          class="bg-white rounded-xl shadow-lg overflow-hidden group transition-transform transform hover:scale-105 cursor-pointer"
+          data-aos="fade-up" data-aos-delay="100">
+          <div class="relative">
+            <img
+              src="https://plus.unsplash.com/premium_photo-1681488262364-8aeb1b6aac56?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="Guardian Website" class="w-full h-48 object-cover" />
+            <div
+              class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <span class="text-white text-lg font-semibold">E-commerce Website</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold mb-2">Guardian Website</h3>
+            <p class="text-gray-600 mb-4 text-sm">A sleek e-commerce platform built using React.js, focusing on smooth
+              user experience and performance.</p>
+            <span class="text-blue-600 hover:underline">View Demo →</span>
+          </div>
+        </a>
+
+        <!-- Project Card 2 -->
+        <a href="https://github.com/junhuito/weather-app" target="_blank"
+          class="bg-white rounded-xl shadow-lg overflow-hidden group transition-transform transform hover:scale-105 cursor-pointer"
+          data-aos="fade-up" data-aos-delay="200">
+          <div class="relative">
+            <img
+              src="https://images.unsplash.com/photo-1614480633894-f3b7f4bb0e76?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="Weather App" class="w-full h-48 object-cover" />
+            <div
+              class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <span class="text-white text-lg font-semibold">Weather App</span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold mb-2">Weather App</h3>
+            <p class="text-gray-600 mb-4 text-sm">A React Native Expo app for checking weather real-time conditions.</p>
+            <span class="text-blue-600 hover:underline">View GitHub →</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Experience -->
+  <section id="experience" class="experience-section">
+    <h2 class="section-title" data-aos="fade-up">Experience</h2>
+    <div class="timeline">
+  
+      <div class="timeline-year">2024</div>
+  
+      <div class="timeline-item" data-aos="fade-up">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3 class="position-title">Senior Software Engineer</h3>
+          <p class="company">PropertyGuru Group · Full-time</p>
+          <p class="date-location">Sep 2024 - Present · Hybrid</p>
+          <p class="description">Enhanced and maintained websites using Next.js, Sass, and TypeScript, while improving mobile applications with React Native and MobX for efficient state management.</p>
+        </div>
+      </div>
+  
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3 class="position-title">Senior Software Engineer</h3>
+          <p class="company">Bridzia Malaysia · Full-time</p>
+          <p class="date-location">Nov 2023 - Aug 2024 · Remote</p>
+          <p class="description">Worked on frontend development, integrating design elements, enhancing user experience for responsive web platforms, and developing responsive web applications with GraphQL for data communication, leading projects to ensure a seamless, user-friendly experience across devices.</p>
+        </div>
+      </div>
+  
+      <div class="timeline-year">2021</div>
+  
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3 class="position-title">IT Analyst</h3>
+          <p class="company">Daikin Malaysia Sdn Bhd · Full-time</p>
+          <p class="date-location">Feb 2021 - Nov 2023</p>
+          <p class="description">Developed and maintained mobile apps using React Native. Worked with AWS services like Lambda, DynamoDB, and API Gateway. Published apps to the Play Store, App Store, and App Gallery.</p>
+        </div>
+      </div>
+  
+    </div>
+  </section>
+  
+  <!-- Contact -->
+  <section class="py-16 bg-white px-4">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-6">Get in Touch</h2>
+      <p class="text-gray-600 mb-6">Interested in working together or just want to say hi? Drop me a message below!</p>
+      <a href="mailto:junhuito5771@gmail.com"
+        class="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition animate-float">
+        Send Email
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 text-sm text-gray-500 bg-gray-50">
+    &copy; 2025 Jun. Built with ❤️ and Tailwind CSS.
+  </footer>
+</body>
+
+</html>
