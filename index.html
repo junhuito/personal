@@ -212,7 +212,13 @@
   }
 </style>
 
-<body class="bg-gray-50 text-gray-800 font-sans overflow-x-hidden">
+<style>
+  body, html {
+    overflow-x: hidden;
+  }
+</style>
+
+<body class="bg-gray-50 text-gray-800 font-sans">
   <script>
     AOS.init();
   </script>
@@ -556,6 +562,7 @@
     
     class TimeLineItem {
       nodeElement = null;
+      actions = new Set();
 
       constructor(nodeElement) {
         this.nodeElement = nodeElement;
@@ -590,20 +597,27 @@
       }
 
       moveX(x) {
-        this.nodeElement.style.transform = `translateX(${x})`;
+        this.actions.add(`translateX(${x})`)
       }
 
       moveY(y) {
-        this.nodeElement.style.transform = `translateY(${y})`;
+        this.actions.add(`translateY(${y})`)
       }
 
       move(x, y) {
-        console.log('moving?');
-        this.nodeElement.style.transform = `translate(${x}, ${y})`;
+        this.actions.add(`translate(${x}, ${y})`)
+      }
+
+      rotate(deg) {
+        this.actions.add(`rotate(${deg})`);
       }
 
       init(x, y) {
         this.move(x, y);
+      }
+
+      startAnimate() {
+        this.nodeElement.style.transform = [...this.actions].join(' ');
       }
 
       /**
@@ -619,7 +633,9 @@
         }
 
         timeLine.onScroll((progress) => {
+          this.actions.clear();
           callback(progress);
+          this.startAnimate();
         })
       }
     }
