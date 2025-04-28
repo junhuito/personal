@@ -503,12 +503,8 @@
         return window.navigator.userAgent.toLowerCase().includes('mobile');
       }
 
-      constructor(nodeElement) {
-        this.nodeElement = nodeElement;
-
-        nodeElement.addEventListener(this.isMobile ? 'touchmove' : 'scroll', () => {
-          
-          if (!this.isTicked) {
+      _run() {
+        if (!this.isTicked) {
             this.isTicked = true;
             requestAnimationFrame(() => {
               const x = this.scrollLeft;
@@ -524,8 +520,21 @@
               this.isTicked = false;
             })
           }
-          
+      }
+
+      constructor(nodeElement) {
+        this.nodeElement = nodeElement;
+
+        nodeElement.addEventListener('scroll', () => {
+          this._run();
         })
+
+        if (this.isMobile) {
+          nodeElement.addEventListener('touchmove', () => {
+            this._run();
+          })
+        }
+        
       }
 
       onScroll(callback) {
