@@ -190,17 +190,39 @@
 </style>
 
 
+<style>
+  #tech-stack-text::after {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 3px;
+    background-color: #4CAF50;
+    margin: 0 auto;
+    margin-top: 10px;
+  }
+  #tech-stack-text {
+    transition: all .05s;
+  }
+</style>
 
 
-<body class="bg-gray-50 text-gray-800 font-sans">
+<style>
+  #special-text > span {
+    display: inline-block;
+  }
+</style>
+
+<body class="bg-gray-50 text-gray-800 font-sans overflow-x-hidden">
   <script>
     AOS.init();
   </script>
+
+  <span id="progress-bar" class="bg-green-600 fixed h-[5px] w-full z-[1]"></span>
   <!-- Hero -->
-  <section
+  <section id="hero"
     class="min-h-screen flex flex-col justify-center items-center text-center px-4 bg-cover bg-center lg:bg-fixed"
     style="background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&q=80');">
-    <div class="bg-white bg-opacity-80 backdrop-blur-sm p-10 rounded-xl shadow-xl animate-fade-up">
+    <div id="hero-intro" class="bg-white bg-opacity-80 backdrop-blur-sm p-10 rounded-xl shadow-xl ">
       <h1 class="text-4xl md:text-6xl font-bold mb-4">Hi, I'm <span class="text-blue-600">Jun</span></h1>
       <p class="text-xl text-gray-700 max-w-xl mb-6">
         A passionate programmer who builds web applications using modern tools like React, TypeScript, Node.js, and
@@ -216,7 +238,7 @@
   <!-- Skills -->
   <section class="py-20 bg-white px-4">
     <div class="max-w-6xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-12">Tech Stack</h2>
+      <h2 id="tech-stack-text" class="text-3xl font-bold mb-12">Tech Stack</h2>
 
       <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-12 text-left">
         <!-- Frontend -->
@@ -345,49 +367,53 @@
   <section id="experience" class="experience-section">
     <h2 class="section-title" data-aos="fade-up">Experience</h2>
     <div class="timeline">
-  
+
       <div class="timeline-year">2024</div>
-  
+
       <div class="timeline-item" data-aos="fade-up">
         <div class="timeline-dot"></div>
         <div class="timeline-content">
           <h3 class="position-title">Senior Software Engineer</h3>
           <p class="company">PropertyGuru Group · Full-time</p>
           <p class="date-location">Sep 2024 - Present · Hybrid</p>
-          <p class="description">Enhanced and maintained websites using Next.js, Sass, and TypeScript, while improving mobile applications with React Native and MobX for efficient state management.</p>
+          <p class="description">Enhanced and maintained websites using Next.js, Sass, and TypeScript, while improving
+            mobile applications with React Native and MobX for efficient state management.</p>
         </div>
       </div>
-  
+
       <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
         <div class="timeline-dot"></div>
         <div class="timeline-content">
           <h3 class="position-title">Senior Software Engineer</h3>
           <p class="company">Bridzia Malaysia · Full-time</p>
           <p class="date-location">Nov 2023 - Aug 2024 · Remote</p>
-          <p class="description">Worked on frontend development, integrating design elements, enhancing user experience for responsive web platforms, and developing responsive web applications with GraphQL for data communication, leading projects to ensure a seamless, user-friendly experience across devices.</p>
+          <p class="description">Worked on frontend development, integrating design elements, enhancing user experience
+            for responsive web platforms, and developing responsive web applications with GraphQL for data
+            communication, leading projects to ensure a seamless, user-friendly experience across devices.</p>
         </div>
       </div>
-  
+
       <div class="timeline-year">2021</div>
-  
+
       <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
         <div class="timeline-dot"></div>
         <div class="timeline-content">
           <h3 class="position-title">IT Analyst</h3>
           <p class="company">Daikin Malaysia Sdn Bhd · Full-time</p>
           <p class="date-location">Feb 2021 - Nov 2023</p>
-          <p class="description">Developed and maintained mobile apps using React Native. Worked with AWS services like Lambda, DynamoDB, and API Gateway. Published apps to the Play Store, App Store, and App Gallery.</p>
+          <p class="description">Developed and maintained mobile apps using React Native. Worked with AWS services like
+            Lambda, DynamoDB, and API Gateway. Published apps to the Play Store, App Store, and App Gallery.</p>
         </div>
       </div>
-  
+
     </div>
   </section>
-  
+
   <!-- Contact -->
   <section class="py-16 bg-white px-4">
     <div class="max-w-2xl mx-auto text-center">
       <h2 class="text-3xl font-bold mb-6">Get in Touch</h2>
-      <p class="text-gray-600 mb-6">Interested in working together or just want to say hi? Drop me a message below!</p>
+      <p id="special-text" class="text-gray-600 mb-6">Interested in working together or just want to say hi? Drop me a message below!</p>
       <a href="mailto:junhuito5771@gmail.com"
         class="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition animate-float">
         Send Email
@@ -398,8 +424,254 @@
 
   <!-- Footer -->
   <footer class="text-center py-6 text-sm text-gray-500 bg-gray-50">
-    &copy; 2025 Jun. Built with ❤️ and Tailwind CSS.
+    &copy; 2025 Powered by Jun.
   </footer>
+
+
+  <script>
+    class TimeLine {
+      progressX = 0;
+      progressY = 0;
+      timeLineWidth = 0;
+      timeLineHeight = 0;
+      nodeElement = window;
+      callbacks = new Set();
+      isTicked = false;
+
+      get isWindow() {
+        return this.nodeElement === window;
+      }
+
+      get size() {
+        if (this.isWindow) {
+          const scrollHeight = Math.max(
+            document.body.scrollHeight,
+            document.documentElement.scrollHeight
+          );
+
+          const scrollWidth = Math.max(
+            document.body.scrollWidth,
+            document.documentElement.scrollWidth
+          );
+
+          const width = scrollWidth - window.innerWidth;
+          const height = scrollHeight - window.innerHeight;
+
+          return {
+            width,
+            height,
+          }
+        }
+
+        const x = this.nodeElement.scrollLeft;
+        const y = this.nodeElement.scrollTop;
+
+        const height = this.nodeElement.scrollHeight - this.nodeElement.clientHeight;
+        const width = this.nodeElement.scrollWidth - this.nodeElement.clientWidth;
+
+        return {
+          width,
+          height,
+        }
+      }
+
+      get scrollLeft() {
+        if (this.isWindow) {
+          return this.nodeElement.scrollX;
+        }
+
+        return this.nodeElement.scrollLeft;
+      }
+
+      get scrollTop() {
+        if (this.isWindow) {
+          return this.nodeElement.scrollY;
+        }
+
+        return this.nodeElement.scrollTop;
+      }
+
+      get height() {
+        return this.size.height;
+      }
+
+      get width() {
+        return this.size.width;
+      }
+
+      get isMobile() {
+        return window.navigator.userAgent.toLowerCase().includes('mobile');
+      }
+
+      constructor(nodeElement) {
+        this.nodeElement = nodeElement;
+
+        nodeElement.addEventListener(this.isMobile ? 'touchmove' : 'scroll', () => {
+          
+          if (!this.isTicked) {
+            this.isTicked = true;
+            requestAnimationFrame(() => {
+              const x = this.scrollLeft;
+              const y = this.scrollTop;
+
+              const { width, height } = this.size
+
+              this.progressX = (x / width) || 0;
+              this.progressY = (y / height) || 0;
+
+              this.handleScroll();
+
+              this.isTicked = false;
+            })
+          }
+          
+        })
+      }
+
+      onScroll(callback) {
+        if (typeof callback !== 'function') {
+          throw new Error('callback is not a function');
+        }
+        this.callbacks.add(callback);
+      }
+
+      handleScroll() {
+        this.callbacks.forEach((callback) => {
+          callback({
+            progressX: this.progressX,
+            progressY: this.progressY
+          });
+        })
+      }
+    }
+    
+    class TimeLineItem {
+      nodeElement = null;
+
+      constructor(nodeElement) {
+        this.nodeElement = nodeElement;
+      }
+
+      get height() {
+        return this.nodeElement.clientHeight;
+      }
+
+      get width() {
+        return this.nodeElement.clientWidth;
+      }
+
+      get isWindow() {
+        return this.nodeElement === window;
+      }
+
+      get scrollLeft() {
+        if (this.isWindow) {
+          return this.nodeElement.scrollX;
+        }
+
+        return this.nodeElement.scrollLeft;
+      }
+
+      get scrollTop() {
+        if (this.isWindow) {
+          return this.nodeElement.scrollY;
+        }
+
+        return this.nodeElement.scrollTop;
+      }
+
+      moveX(x) {
+        this.nodeElement.style.transform = `translateX(${x})`;
+      }
+
+      moveY(y) {
+        this.nodeElement.style.transform = `translateY(${y})`;
+      }
+
+      move(x, y) {
+        console.log('moving?');
+        this.nodeElement.style.transform = `translate(${x}, ${y})`;
+      }
+
+      init(x, y) {
+        this.move(x, y);
+      }
+
+      /**
+       * @param {TimeLine} timeLine
+       */
+      subscribe(timeLine, callback = () => { }) {
+        if (!this.nodeElement) {
+          throw new Error('nodeElement is required');
+        }
+
+        if (!(timeLine instanceof TimeLine)) {
+          throw new Error('timeLine is not an instance of TimeLine');
+        }
+
+        timeLine.onScroll((progress) => {
+          callback(progress);
+        })
+      }
+    }
+
+    const timeLine = new TimeLine(window);
+    const heroItem = new TimeLineItem(document.querySelector('#hero'));
+    const heroIntroItem = new TimeLineItem(document.querySelector('#hero-intro'));
+    const topProgressBar = new TimeLineItem(document.querySelector('#progress-bar'));
+    const techStackTextItem = new TimeLineItem(document.querySelector('#tech-stack-text'));
+
+    const isDesktop = !timeLine.isMobile;
+
+    techStackTextItem.subscribe(timeLine, ({ progressY }) => {
+      const x = progressY * 40;
+      const y = Math.cos(x) * 50;
+      const cappedX = isDesktop ? 40 : 20;
+      
+      const finalX = Math.min((x * 4), cappedX);
+
+      techStackTextItem.move(`-${finalX}%`, `${finalX === cappedX ? 0 : y}px`);
+      
+    })
+    
+
+    topProgressBar.init('-100%', '0%');
+    topProgressBar.subscribe(timeLine, ({ progressY }) => {
+      topProgressBar.moveX(`-${100 - (100 * progressY)}%`);
+    })
+
+    const portion = heroItem.height / timeLine.height * 100;
+    
+
+    heroItem.subscribe(timeLine, ({ progressY }) => {
+      const finalProgress = Math.min(((progressY * 100) / portion) * 100, 100);
+      heroItem.moveX(`-${finalProgress}%`);
+    })
+
+    heroIntroItem.subscribe(timeLine, ({ progressY }) => {
+      const finalProgress = Math.min(((progressY * 100) / portion) * 100, 100);
+      heroIntroItem.moveX(`${finalProgress * 4}%`);
+    })
+
+    const specialText = document.querySelector('#special-text');
+    specialText.innerHTML = specialText.innerHTML.split('').map((char) => `<span>${char === ' ' ? '&nbsp;' : char}</span>`).join('');
+
+    const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+    const MAX_RANGE = 1250;
+    specialText.childNodes.forEach((child) => {
+      const specialTextItem = new TimeLineItem(child);
+
+      const x = getRandomNumber(-MAX_RANGE, MAX_RANGE);
+      const y = getRandomNumber(-MAX_RANGE, MAX_RANGE);
+      specialTextItem.subscribe(timeLine, ({ progressY }) => {
+
+        const finalX = x - ((x * progressY));
+        const finalY = y - ((y * progressY));
+
+        specialTextItem.move(`${finalX}px`, `${finalY}px`);
+      })
+    })    
+  </script>
 </body>
 
 </html>
