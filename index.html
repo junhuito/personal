@@ -590,12 +590,10 @@
         .from(scrollHeight - 150)
         .to(scrollHeight)
         .onProgress((progress) => {
-          const initial = 7.2;
+          const initial = -50;
           const state = (1 - progress) * initial;
 
-          specialTextItem.style({
-            letterSpacing: `-${state}px`
-          }).opacity(progress)
+          specialTextItem.moveY(`${state}px`).opacity(progress)
         })
         .startAnimate();
 
