@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="spacer" style="height: 150vh;"></div>
+
+    <div id="box" style="
+  width: 100px;
+  height: 100px;
+  background: coral;
+  position: relative;
+  transition: transform 0.05s linear;
+"></div>
+
+    <div class="spacer" style="height: 150vh;"></div>
+
+    <script>
+
+        class Animate {
+            element = null;
+            transformActions = new Set();
+            constructor(element, from, to, onProgress) {
+                if (typeof element === 'string') {
+                    element = document.querySelector(element);
+                }
+
+                if (!element) {
+                    return
+                }
+
+                this.element = element;
+                this.from = from;
+                this.to = to;
+                this.onProgress = onProgress;
+            }
+
+            startAnimate() {
+                requestAnimationFrame(() => {
+                    this.startAnimate();
+                });
+
+                const scrollY = window.scrollY;
+                const clampedScroll = Math.min(Math.max(scrollY, this.from), this.to);
+                const progress = (clampedScroll - this.from) / (this.to - this.from);
+                this.transformActions.clear();
+                this.onProgress(progress);
+                this.style({
+                    transform: [...this.transformActions].join(' '),
+                });
+            }
+
+            moveX(x) {
+                this.transformActions.add(`translateX(${x})`)
+
+                return this;  
+            }
+
+            moveY(y) {
+                this.transformActions.add(`translateY(${y})`)
+
+                return this;
+            }
+
+            move(x, y) {
+                this.transformActions.add(`translate(${x}, ${y})`)
+
+                return this;
+            }
+
+            rotate(deg) {
+                this.transformActions.add(`rotate(${deg})`);
+
+                return this;
+            }
+
+            scale(size) {
+                this.transformActions.add(`scale(${size})`)
+
+                return this;
+            }
+
+            opacity(val) {
+                if (typeof val === 'number') {
+                    this.style({ opacity: val })
+                }
+            }
+
+            /**
+             * @param {CSSStyleDeclaration} props
+             */
+            style(props) {
+                Object.assign(this.element.style, props || {});
+
+                return this;
+            }
+        }
+
+        const box = new Animate('#box')
+        box.from = 100;
+        box.to = 600;
+        box.onProgress = (p) => {
+            box.moveX(`${p * 300}px`).scale(1 + 0.5 * p).opacity(p)
+        }
+        box.startAnimate();
+
+    </script>
+</body>
+
+</html>
