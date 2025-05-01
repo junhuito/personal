@@ -200,6 +200,7 @@
     margin: 0 auto;
     margin-top: 10px;
   }
+
   #tech-stack-text {
     transition: all .05s;
   }
@@ -207,13 +208,14 @@
 
 
 <style>
-  #special-text > span {
+  #special-text>span {
     display: inline-block;
   }
 </style>
 
 <style>
-  body, html {
+  body,
+  html {
     overflow-x: hidden;
   }
 </style>
@@ -433,269 +435,170 @@
     &copy; 2025 Powered by Jun.
   </footer>
 
-
   <script>
-    class TimeLine {
-      progressX = 0;
-      progressY = 0;
-      timeLineWidth = 0;
-      timeLineHeight = 0;
-      nodeElement = window;
-      callbacks = new Set();
-      isTicked = false;
+    class AnimateItem {
+      element = null;
+      transformActions = new Set();
 
-      get isWindow() {
-        return this.nodeElement === window;
-      }
-
-      get size() {
-        if (this.isWindow) {
-          const scrollHeight = Math.max(
-            document.body.scrollHeight,
-            document.documentElement.scrollHeight
-          );
-
-          const scrollWidth = Math.max(
-            document.body.scrollWidth,
-            document.documentElement.scrollWidth
-          );
-
-          const width = scrollWidth - window.innerWidth;
-          const height = scrollHeight - window.innerHeight;
-
-          return {
-            width,
-            height,
-          }
+      constructor(element) {
+        if (typeof element === 'string') {
+          element = document.querySelector(element);
         }
 
-        const x = this.nodeElement.scrollLeft;
-        const y = this.nodeElement.scrollTop;
-
-        const height = this.nodeElement.scrollHeight - this.nodeElement.clientHeight;
-        const width = this.nodeElement.scrollWidth - this.nodeElement.clientWidth;
-
-        return {
-          width,
-          height,
-        }
-      }
-
-      get scrollLeft() {
-        if (this.isWindow) {
-          return this.nodeElement.scrollX;
+        if (!element) {
+          return
         }
 
-        return this.nodeElement.scrollLeft;
+        this.element = element;
       }
 
-      get scrollTop() {
-        if (this.isWindow) {
-          return this.nodeElement.scrollY;
-        }
+      from(val) {
+        this.from = val;
 
-        return this.nodeElement.scrollTop;
+        return this;
       }
 
-      get height() {
-        return this.size.height;
-      }
+      to(val) {
+        this.to = val;
 
-      get width() {
-        return this.size.width;
-      }
-
-      get isMobile() {
-        return window.navigator.userAgent.toLowerCase().includes('mobile');
-      }
-
-      _run() {
-        if (!this.isTicked) {
-            this.isTicked = true;
-            requestAnimationFrame(() => {
-              const x = this.scrollLeft;
-              const y = this.scrollTop;
-
-              const { width, height } = this.size
-
-              this.progressX = (x / width) || 0;
-              this.progressY = (y / height) || 0;
-
-              this.handleScroll();
-
-              this.isTicked = false;
-            })
-          }
-      }
-
-      constructor(nodeElement) {
-        this.nodeElement = nodeElement;
-
-        nodeElement.addEventListener('scroll', () => {
-          this._run();
-        })
-
-        if (this.isMobile) {
-          nodeElement.addEventListener('touchmove', () => {
-            this._run();
-          })
-        }
-        
-      }
-
-      onScroll(callback) {
-        if (typeof callback !== 'function') {
-          throw new Error('callback is not a function');
-        }
-        this.callbacks.add(callback);
-      }
-
-      handleScroll() {
-        this.callbacks.forEach((callback) => {
-          callback({
-            progressX: this.progressX,
-            progressY: this.progressY
-          });
-        })
-      }
-    }
-    
-    class TimeLineItem {
-      nodeElement = null;
-      actions = new Set();
-
-      constructor(nodeElement) {
-        this.nodeElement = nodeElement;
-      }
-
-      get height() {
-        return this.nodeElement.clientHeight;
-      }
-
-      get width() {
-        return this.nodeElement.clientWidth;
-      }
-
-      get isWindow() {
-        return this.nodeElement === window;
-      }
-
-      get scrollLeft() {
-        if (this.isWindow) {
-          return this.nodeElement.scrollX;
-        }
-
-        return this.nodeElement.scrollLeft;
-      }
-
-      get scrollTop() {
-        if (this.isWindow) {
-          return this.nodeElement.scrollY;
-        }
-
-        return this.nodeElement.scrollTop;
-      }
-
-      moveX(x) {
-        this.actions.add(`translateX(${x})`)
-      }
-
-      moveY(y) {
-        this.actions.add(`translateY(${y})`)
-      }
-
-      move(x, y) {
-        this.actions.add(`translate(${x}, ${y})`)
-      }
-
-      rotate(deg) {
-        this.actions.add(`rotate(${deg})`);
-      }
-
-      init(x, y) {
-        this.move(x, y);
+        return this;
       }
 
       startAnimate() {
-        this.nodeElement.style.transform = [...this.actions].join(' ');
+        requestAnimationFrame(() => {
+          this.startAnimate();
+        });
+
+        const scrollY = window.scrollY;
+        const clampedScroll = Math.min(Math.max(scrollY, this.from), this.to);
+        const progress = (clampedScroll - this.from) / (this.to - this.from);
+        this.transformActions.clear();
+        this.onProgress.call(this, progress);
+        this.style({
+          transform: [...this.transformActions].join(' '),
+          willChange: 'transform'
+        });
+      }
+
+      moveX(x) {
+        this.transformActions.add(`translateX(${x})`)
+
+        return this;
+      }
+
+      moveY(y) {
+        this.transformActions.add(`translateY(${y})`)
+
+        return this;
+      }
+
+      move(x, y) {
+        this.transformActions.add(`translate(${x}, ${y})`)
+
+        return this;
+      }
+
+      rotate(deg) {
+        this.transformActions.add(`rotate(${deg})`);
+
+        return this;
+      }
+
+      scale(size) {
+        this.transformActions.add(`scale(${size})`)
+
+        return this;
+      }
+
+      opacity(val) {
+        if (typeof val === 'number') {
+          this.style({ opacity: val })
+        }
+      }
+
+      onProgress(callback) {
+        this.onProgress = callback;
+
+        return this;
       }
 
       /**
-       * @param {TimeLine} timeLine
+       * @param {CSSStyleDeclaration} props
        */
-      subscribe(timeLine, callback = () => { }) {
-        if (!this.nodeElement) {
-          throw new Error('nodeElement is required');
-        }
+      style(props) {
+        Object.assign(this.element.style, props || {});
 
-        if (!(timeLine instanceof TimeLine)) {
-          throw new Error('timeLine is not an instance of TimeLine');
-        }
-
-        timeLine.onScroll((progress) => {
-          this.actions.clear();
-          callback(progress);
-          this.startAnimate();
-        })
+        return this;
       }
     }
 
-    const timeLine = new TimeLine(window);
-    const heroItem = new TimeLineItem(document.querySelector('#hero'));
-    const heroIntroItem = new TimeLineItem(document.querySelector('#hero-intro'));
-    const topProgressBar = new TimeLineItem(document.querySelector('#progress-bar'));
-    const techStackTextItem = new TimeLineItem(document.querySelector('#tech-stack-text'));
+    const isMobile = window.navigator.userAgent.toLowerCase().includes('mobile');
+    const scrollHeight = Math.max(
+      document.body.scrollHeight,
+      document.documentElement.scrollHeight
+    ) - window.innerHeight;
 
-    const isDesktop = !timeLine.isMobile;
+    const screenWidth = window.innerWidth;
 
-    techStackTextItem.subscribe(timeLine, ({ progressY }) => {
-      const x = progressY * 40;
-      const y = Math.cos(x) * 50;
-      const cappedX = isDesktop ? 40 : 20;
-      
-      const finalX = Math.min((x * 4), cappedX);
+    const heroItem = new AnimateItem('#hero');
+    const heroIntroItem = new AnimateItem('#hero-intro');
+    const topProgressBar = new AnimateItem('#progress-bar');
+    const techStackTextItem = new AnimateItem('#tech-stack-text');
 
-      techStackTextItem.move(`-${finalX}%`, `${finalX === cappedX ? 0 : y}px`);
-      
-    })
-    
+    const windowInnerHeight = window.innerHeight;
+    techStackTextItem
+      .from(window.innerHeight / 2)
+      .to(window.innerHeight)
+      .onProgress((progress) => {
 
-    topProgressBar.init('-100%', '0%');
-    topProgressBar.subscribe(timeLine, ({ progressY }) => {
-      topProgressBar.moveX(`-${100 - (100 * progressY)}%`);
-    })
+        const remaining = 1 - progress;
 
-    const portion = heroItem.height / timeLine.height * 100;
-    
+        const x = remaining * 100;
 
-    heroItem.subscribe(timeLine, ({ progressY }) => {
-      const finalProgress = Math.min(((progressY * 100) / portion) * 100, 100);
-      heroItem.moveX(`-${finalProgress}%`);
-    })
-
-    heroIntroItem.subscribe(timeLine, ({ progressY }) => {
-      const finalProgress = Math.min(((progressY * 100) / portion) * 100, 100);
-      heroIntroItem.moveX(`${finalProgress * 4}%`);
-    })
-
-    const specialText = document.querySelector('#special-text');
-    specialText.innerHTML = specialText.innerHTML.split('').map((char) => `<span>${char === ' ' ? '&nbsp;' : char}</span>`).join('');
-
-    const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
-    const MAX_RANGE = 1250;
-    specialText.childNodes.forEach((child) => {
-      const specialTextItem = new TimeLineItem(child);
-
-      const x = getRandomNumber(-MAX_RANGE, MAX_RANGE);
-      const y = getRandomNumber(-MAX_RANGE, MAX_RANGE);
-      specialTextItem.subscribe(timeLine, ({ progressY }) => {
-
-        const finalX = x - ((x * progressY));
-        const finalY = y - ((y * progressY));
-
-        specialTextItem.move(`${finalX}px`, `${finalY}px`);
+        techStackTextItem.moveX(`${x}%`).opacity(progress);
       })
-    })    
+      .startAnimate();
+
+    heroItem
+      .from(0)
+      .to(window.innerHeight)
+      .onProgress((progress) => {
+        heroItem.moveX(`-${progress * 100}%`).opacity(1 - progress);
+      })
+      .startAnimate();
+
+    heroIntroItem
+      .from(0)
+      .to(window.innerHeight)
+      .onProgress((progress) => {
+        heroIntroItem.moveX(`${(screenWidth * progress) * 2}px`).opacity(1 - progress);
+      })
+      .startAnimate();
+
+    topProgressBar
+      .from(0)
+      .to(scrollHeight)
+      .onProgress((progress) => {
+        topProgressBar.moveX(`-${(1 - progress) * 100}%`)
+      })
+      .startAnimate();
+
+      const specialText = document.querySelector('#special-text');
+
+      const specialTextItem = new AnimateItem(specialText);
+      specialTextItem
+        .from(scrollHeight - 150)
+        .to(scrollHeight)
+        .onProgress((progress) => {
+          const initial = 7.2;
+          const state = (1 - progress) * initial;
+
+          specialTextItem.style({
+            letterSpacing: `-${state}px`
+          }).opacity(progress)
+        })
+        .startAnimate();
+
   </script>
 </body>
 
