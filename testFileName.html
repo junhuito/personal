@@ -105,10 +105,9 @@
         box.from = 100;
         box.to = 600;
         box.onProgress = (p) => {
-            box.moveX(`${p * 300}px`).scale(1 + 0.5 * p).opacity(p)
+            box.moveY(`${p * 300}px`).scale(1 + 0.5 * p).opacity(p)
         }
         box.startAnimate();
-
     </script>
 </body>
 
