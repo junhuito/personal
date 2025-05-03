@@ -52,6 +52,7 @@
     padding: 60px 20px;
     background: #f9f9f9;
     text-align: center;
+    position: relative;
   }
 
   .section-title {
@@ -217,6 +218,16 @@
   body,
   html {
     overflow-x: hidden;
+  }
+</style>
+
+<style>
+  #rocket {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: -20px;
+    top: -20px;
   }
 </style>
 
@@ -414,7 +425,47 @@
         </div>
       </div>
 
+      <svg id='rocket' width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><rect width='24' height='24' stroke='none' fill='#000000' opacity='0'/>
+        <g transform="matrix(1.43 0 0 1.43 12 12)" >
+        <g style="" >
+        <g transform="matrix(1 0 0 1 1.38 3.89)" >
+        <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" transform=" translate(-8.38, -10.89)" d="M 9.68996 8.28998 C 11 10.21 9.99996 12 8.45996 13.5 L 6.45996 10.18" stroke-linecap="round" />
+        </g>
+        <g transform="matrix(1 0 0 1 -3.9 -1.38)" >
+        <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1;" transform=" translate(-3.1, -5.62)" d="M 5.71 4.31002 C 3.79 3.00002 2 4.00002 0.5 5.54002 L 3.82 7.54002" stroke-linecap="round" />
+        </g>
+        <g transform="matrix(1 0 0 1 -3.9 -1.38)" >
+        <path style="stroke: rgb(47,174,75); stroke-width: 1; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;" transform=" translate(-3.1, -5.62)" d="M 5.71 4.31002 C 3.79 3.00002 2 4.00002 0.5 5.54002 L 3.82 7.54002" stroke-linecap="round" />
+        </g>
+        <g transform="matrix(1 0 0 1 1.38 3.89)" >
+        <path style="stroke: rgb(47,174,75); stroke-width: 1; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;" transform=" translate(-8.38, -10.89)" d="M 9.68996 8.28998 C 11 10.21 9.99996 12 8.45996 13.5 L 6.45996 10.18" stroke-linecap="round" />
+        </g>
+        <g transform="matrix(1 0 0 1 2.39 -2.39)" >
+        <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(148,233,134); fill-rule: nonzero; opacity: 1;" transform=" translate(-9.39, -4.61)" d="M 13.1 0.900003 C 13.1 0.900003 14.48 4.16 12.1 6.54 C 11.4276 7.23683 10.2658 7.96728 8.97994 8.71994 L 5.27893 5.01893 C 6.03108 3.73462 6.76417 2.57142 7.46 1.9 C 9.84 -0.479997 13.1 0.900003 13.1 0.900003 Z" stroke-linecap="round" />
+        </g>
+        <g transform="matrix(1 0 0 1 -0.6 -1.32)" >
+        <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: evenodd; opacity: 1;" transform=" translate(-6.4, -5.68)" d="M 6.46995 10.18 L 3.81995 7.52997 C 4.1113 7.04207 4.40158 6.5376 4.6898 6.0367 C 5.64805 4.37139 6.58355 2.74561 7.45995 1.89996 C 7.75745 1.60246 8.0687 1.36371 8.38561 1.17368 C 8.0687 1.36371 7.75745 1.60247 7.45995 1.89996 C 6.76412 2.57138 6.03103 3.73458 5.27888 5.01889 L 8.97988 8.7199 C 8.66181 8.90607 8.33616 9.09361 8.00844 9.28233 C 7.49354 9.57883 6.97356 9.87827 6.46995 10.18 Z" stroke-linecap="round" />
+        </g>
+        <g transform="matrix(1 0 0 1 1.66 -1.66)" >
+        <path style="stroke: rgb(47,174,75); stroke-width: 1; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;" transform=" translate(-8.66, -5.34)" d="M 3.81995 7.52997 L 6.46995 10.18 C 8.58995 8.90997 10.9999 7.67997 12.0999 6.53997 C 14.4799 4.15997 13.0999 0.899973 13.0999 0.899973 C 13.0999 0.899973 9.83995 -0.480028 7.45995 1.89997 C 6.31995 2.99997 5.07995 5.41997 3.81995 7.52997 Z" stroke-linecap="round" />
+        </g>
+        <g transform="matrix(1 0 0 1 0.13 -0.13)" >
+        <path style="stroke: rgb(47,174,75); stroke-width: 1; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;" transform=" translate(-7.13, -6.87)" d="M 5.28003 5.02002 L 8.98003 8.72002" stroke-linecap="round" />
+        </g>
+        <g transform="matrix(1 0 0 1 3.5 -3.5)" >
+        <path style="stroke: rgb(47,174,75); stroke-width: 1; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;" transform=" translate(-10.5, -3.5)" d="M 10.5 4 C 10.7761 4 11 3.77614 11 3.5 C 11 3.22386 10.7761 3 10.5 3 C 10.2239 3 10 3.22386 10 3.5 C 10 3.77614 10.2239 4 10.5 4 Z" stroke-linecap="round" />
+        </g>
+        <g transform="matrix(1 0 0 1 -4.67 4.67)" >
+        <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(148,233,134); fill-rule: nonzero; opacity: 1;" transform=" translate(-2.33, -11.67)" d="M 3.68 12.44 C 3.1 13 0.5 13.5 0.5 13.5 C 0.5 13.5 1 10.9 1.56 10.32 C 1.69732 10.1726 1.86292 10.0544 2.04692 9.97244 C 2.23092 9.89046 2.42955 9.84638 2.63095 9.84282 C 2.83236 9.83927 3.03242 9.87632 3.2192 9.95176 C 3.40597 10.0272 3.57564 10.1395 3.71808 10.2819 C 3.86051 10.4244 3.9728 10.594 4.04825 10.7808 C 4.12369 10.9676 4.16074 11.1676 4.15718 11.3691 C 4.15363 11.5705 4.10955 11.7691 4.02756 11.9531 C 3.94558 12.1371 3.82737 12.3027 3.68 12.44 Z" stroke-linecap="round" />
+        </g>
+        <g transform="matrix(1 0 0 1 -4.67 4.67)" >
+        <path style="stroke: rgb(47,174,75); stroke-width: 1; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;" transform=" translate(-2.33, -11.67)" d="M 3.68 12.44 C 3.1 13 0.5 13.5 0.5 13.5 C 0.5 13.5 1 10.9 1.56 10.32 C 1.69732 10.1726 1.86292 10.0544 2.04692 9.97244 C 2.23092 9.89046 2.42955 9.84638 2.63095 9.84282 C 2.83236 9.83927 3.03242 9.87632 3.2192 9.95176 C 3.40597 10.0272 3.57564 10.1395 3.71808 10.2819 C 3.86051 10.4244 3.9728 10.594 4.04825 10.7808 C 4.12369 10.9676 4.16074 11.1676 4.15718 11.3691 C 4.15363 11.5705 4.10955 11.7691 4.02756 11.9531 C 3.94558 12.1371 3.82737 12.3027 3.68 12.44 Z" stroke-linecap="round" />
+        </g>
+        </g>
+        </g>
+        </svg>
     </div>
+    
   </section>
 
   <!-- Contact -->
@@ -437,6 +488,9 @@
 
   <script>
     class AnimateItem {
+      /**
+       * @type {HTMLElement}
+       */
       element = null;
       transformActions = new Set();
 
@@ -469,7 +523,7 @@
           this.startAnimate();
         });
 
-        const scrollY = window.scrollY;
+        const scrollY = Math.round(window.scrollY);
         const clampedScroll = Math.min(Math.max(scrollY, this.from), this.to);
         const progress = (clampedScroll - this.from) / (this.to - this.from);
         this.transformActions.clear();
@@ -532,18 +586,22 @@
       }
     }
 
+    const screenHeight = window.innerHeight;
+    const screenWidth = window.innerWidth;
+
     const isMobile = window.navigator.userAgent.toLowerCase().includes('mobile');
     const scrollHeight = Math.max(
       document.body.scrollHeight,
       document.documentElement.scrollHeight
-    ) - window.innerHeight;
+    ) - screenHeight;
 
-    const screenWidth = window.innerWidth;
 
     const heroItem = new AnimateItem('#hero');
     const heroIntroItem = new AnimateItem('#hero-intro');
     const topProgressBar = new AnimateItem('#progress-bar');
     const techStackTextItem = new AnimateItem('#tech-stack-text');
+    const specialTextItem = new AnimateItem('#special-text');
+    const timelineCubeItem = new AnimateItem('#rocket');
 
     const windowInnerHeight = window.innerHeight;
     techStackTextItem
@@ -583,9 +641,6 @@
       })
       .startAnimate();
 
-      const specialText = document.querySelector('#special-text');
-
-      const specialTextItem = new AnimateItem(specialText);
       specialTextItem
         .from(scrollHeight - 150)
         .to(scrollHeight)
@@ -596,7 +651,24 @@
           specialTextItem.moveY(`${state}px`).opacity(progress)
         })
         .startAnimate();
+      
+      const experienceContainer = document.querySelector('.experience-section');
+      const timeline = document.querySelector('.timeline');
+      const timelineHeight = timeline.clientHeight;
 
+      const { top: experienceContainerTop, height: experienceContainerHeight } = experienceContainer.getBoundingClientRect();
+      const experienceContainerOffsetTop = experienceContainerTop + window.scrollY;
+
+      timelineCubeItem
+        .from(experienceContainerOffsetTop)
+        .to(experienceContainerOffsetTop + experienceContainerHeight - screenHeight)
+        .onProgress((progress) => {
+          timelineCubeItem
+            .moveY(`${progress * timelineHeight}px`)
+            .rotate('-45deg');
+            
+        })
+        .startAnimate();
   </script>
 </body>
 
