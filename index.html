@@ -495,6 +495,9 @@
       transformActions = new Set();
       willChange = new Set();
 
+      static ins = new Set();
+      static isRunning = false;
+
       constructor(element) {
         if (typeof element === 'string') {
           element = document.querySelector(element);
@@ -519,12 +522,7 @@
         return this;
       }
 
-      startAnimate() {
-        requestAnimationFrame(() => {
-          this.startAnimate();
-        });
-
-        const scrollY = Math.round(window.scrollY);
+      _run(scrollY) {
         const clampedScroll = Math.min(Math.max(scrollY, this.from), this.to);
         const progress = (clampedScroll - this.from) / (this.to - this.from);
         this.transformActions.clear();
@@ -535,6 +533,26 @@
             willChange: [...this.willChange].join(' ')
           }))
         });
+      }
+
+      static run() {
+        requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          for (const animateItem of AnimateItem.ins) {
+            animateItem._run(scrollY);
+          }
+
+          AnimateItem.run();
+        })
+      }
+
+      startAnimate() {
+        AnimateItem.ins.add(this);
+
+        if (AnimateItem.isRunning === false) {
+          AnimateItem.isRunning = true;
+          AnimateItem.run();
+        }
       }
 
       moveX(x) {
