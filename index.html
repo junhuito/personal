@@ -493,6 +493,7 @@
        */
       element = null;
       transformActions = new Set();
+      willChange = new Set();
 
       constructor(element) {
         if (typeof element === 'string') {
@@ -530,41 +531,49 @@
         this.onProgress.call(this, progress);
         this.style({
           transform: [...this.transformActions].join(' '),
-          willChange: 'transform'
+          ...(this.willChange.size && ({
+            willChange: [...this.willChange].join(' ')
+          }))
         });
       }
 
       moveX(x) {
+        this.willChange.add('transform');
         this.transformActions.add(`translateX(${x})`)
 
         return this;
       }
 
       moveY(y) {
+        this.willChange.add('transform');
         this.transformActions.add(`translateY(${y})`)
 
         return this;
       }
 
       move(x, y) {
+        this.willChange.add('transform');
         this.transformActions.add(`translate(${x}, ${y})`)
 
         return this;
       }
 
       rotate(deg) {
+        this.willChange.add('transform');
         this.transformActions.add(`rotate(${deg})`);
 
         return this;
       }
 
       scale(size) {
+        this.willChange.add('transform');
         this.transformActions.add(`scale(${size})`)
 
         return this;
       }
 
       opacity(val) {
+        this.willChange.add('opacity');
         if (typeof val === 'number') {
           this.style({ opacity: val })
         }
